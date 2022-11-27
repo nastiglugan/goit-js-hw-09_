@@ -11,19 +11,21 @@ function onSubmit(evt) {
   const amount = Number(evt.currentTarget.amount.value);
 
   for (let i = 1; i <= amount; i += 1) {
-    delay += step;
-
     createPromise(i, delay).then(onSuccess).catch(onError);
+
+    delay += step;
 
     form.reset();
   }
 }
 function onSuccess({ position, delay }) {
   Notiflix.Notify.success(`✅ Fulfilled promise ${position} in ${delay}ms`);
+  // console.log(`✅ Fulfilled promise ${position} in ${delay}ms`);
 }
 
 function onError({ position, delay }) {
   Notiflix.Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`);
+  // console.log(`❌ Rejected promise ${position} in ${delay}ms`);
 }
 
 function createPromise(position, delay) {
